@@ -236,3 +236,29 @@ plot_pfas <-
         axis.line.y = element_blank(),
         axis.ticks.y = element_blank())
 
+# Summary of PFAS in Each Location
+
+summary_pfas <- pfas %>%
+  inner_join(zwemlocaties) %>%
+  group_by(naam) %>%
+  summarise(mean_peq = mean(peq, na.rm = TRUE),
+            max_peq = max(peq, na.rm = TRUE),
+            min_peq = min(peq, na.rm = TRUE),
+            sd_peq = sd(peq, na.rm = TRUE))
+
+plot_summary_pfas <- summary_pfas %>%
+  ggplot(aes(x = naam, y = mean_peq)) +
+  geom_col(width = 0.85) +
+  geom_errorbar(aes(ymin = mean_peq - sd_peq, ymax = mean_peq + sd_peq), width = 0.2) +
+  geom_point(aes(y = max_peq), color = "red", size = 2) +
+  geom_point(aes(y = min_peq), color = "blue", size = 2) +
+  scale_y_continuous(limits = c(0, NA), expand = expansion(c(0, 0.1))) +
+  labs(title = "Summary of PFAS concentrations in each location",
+       y = "PFAS - PFOA-equivalenten in ng/l",
+       x = "") +
+  hhskthema() +
+  theme(panel.grid.major.y = element_blank(),
+        plot.title.position = "plot",
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.line.y = element_blank(),
+        axis.ticks.y = element_blank())

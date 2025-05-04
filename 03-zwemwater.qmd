@@ -131,3 +131,16 @@ PFAS[^03-zwemwater-6] kan schadelijk zijn voor de gezondheid. In 2024 is op alle
 #| fig-alt: "De hoeveelheid PFAS op zwemlocaties ten opzichte van de advieswaarde van het RIVM."
 plot_pfas
 ```
+
+### Summary of PFAS in Each Location {.unnumbered}
+
+In this section, we summarize the number of PFAS in each location where data was collected. The data is processed and visualized to provide a clear overview of the PFAS concentrations.
+
+```{r}
+#| label: fig-summary-pfas
+#| fig-asp: 0.6
+#| out-width: 100%
+#| fig-cap: "Summary of PFAS concentrations in each location."
+#| fig-alt: "Summary of PFAS concentrations in each location."
+plot_summary_pfas
+```
